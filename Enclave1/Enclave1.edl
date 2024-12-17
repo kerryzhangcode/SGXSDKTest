@@ -1,0 +1,16 @@
+enclave {
+    include "sgx_report.h"
+
+    trusted {
+        public void ecall_add([out] int* result, int a, int b);
+        public int ecall_returnInner();
+        public void ecall_main();
+        public void ecall_generate_report([in] sgx_target_info_t* target_info, [out] sgx_report_t* report);
+    };
+
+    untrusted {
+        void print_call(sgx_status_t ret, int result, [in, string] const char* str);
+        void ocall_print([in, string] const char* str);
+        int ocall_sub(int a, int b);
+    };
+};

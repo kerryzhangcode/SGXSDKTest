@@ -1,0 +1,12 @@
+enclave {
+    include "sgx_report.h"
+
+    trusted {
+        public void ecall_verify_report([in] const sgx_report_t* report);
+         public void ecall_get_target_info([out] sgx_target_info_t* target_info);
+    };
+
+    untrusted {
+        void ocall_print([in, string] const char* str);
+    };
+};
